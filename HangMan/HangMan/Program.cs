@@ -11,6 +11,8 @@ namespace HangMan
 
         static void Main(string[] args)
         {
+
+            DisplayHighScores();
             //call the greetplayer function, and check to see if he or she wants to play
             GreetPlayer();
 
@@ -130,8 +132,39 @@ namespace HangMan
             {
                 Console.WriteLine("Well, that's too bad! Maybe next time! GOOD BYE!");
             }
+           
 
         }
+
+
+        static void AddHighScore(int playerScore)
+        {
+            Console.WriteLine("Your Name");
+                string playerName = Console.ReadLine();
+            OwenEntities db = new OwenEntities();
+            HighScore newHighScore = new HighScore();
+            newHighScore.DateCreated = DateTime.Now;
+            newHighScore.Game = "HangMan";
+            newHighScore.Name = playerName;
+            newHighScore.Score = playerScore;
+
+            db.HighScores.Add(newHighScore);
+            db.SaveChanges();
+        }
+
+        static void DisplayHighScores()
+        {
+            Console.Clear();
+            Console.WriteLine("HangMan");
+            Console.WriteLine("-------");
+            OwenEntities db = new OwenEntities();
+            List<HighScore>highScoresList = db.HighScores.Where(x => x.Game == "HangMan").OrderByDescending(x => x.Score).Take(10).ToList();
+            foreach (HighScore highScore in highScoresList)
+	{
+		 Console.WriteLine("{0}, {1} - {2} on {3}", highScoresList.IndexOf(highScore) + 1 , highScore.Name, highScore.Score);
+	}
+        }
+
     }
         
 }

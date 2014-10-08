@@ -16,7 +16,7 @@ namespace Hang_Man
             //call the hangman function to start game
             HangMan();
 
-            Console.ReadKey();
+
         }
 
         static void HangMan()
@@ -28,7 +28,7 @@ namespace Hang_Man
             //a boolean value to store false for gameSolved            
            // bool wordGuessed = false;
             //an integer variable to store the number of tries player has to guess right word 
-            int numTries = wordPick.Length + 3;
+            int numTries = wordPick.Length + 30;
             //call the Random constructor 
             Random rwg = new Random();
             bool keepPlaying = true;
@@ -61,6 +61,7 @@ namespace Hang_Man
                         {
                             keepPlaying = false;
                             Console.WriteLine("You won!");
+                            
                         }
                     }
                     else
@@ -76,6 +77,7 @@ namespace Hang_Man
                         Console.WriteLine("You won!");
                         keepPlaying = false;
                     }
+
                     else
                     {
                         Console.WriteLine("Incorrect");
@@ -109,6 +111,7 @@ namespace Hang_Man
                 {
                     //if the above condition is true add that letter to the empty string returnedWord
                     returnedWord += letter;
+                    
                 }
                 //if the above condition is false execute else
                 else
